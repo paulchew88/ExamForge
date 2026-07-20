@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="ExamForge.Application/ExamForge.Application.csproj" />
+    <Project Path="ExamForge.Domain/ExamForge.Domain.csproj" />
+    <Project Path="ExamForge.Infrastructure/ExamForge.Infrastructure.csproj" />
+    <Project Path="ExamForge/ExamForge.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="ExamForge.Application.Tests/ExamForge.Application.Tests.csproj" />
+    <Project Path="ExamForge.Domain.Tests/ExamForge.Domain.Tests.csproj" />
+    <Project Path="ExamForge.IntegrationTests/ExamForge.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
