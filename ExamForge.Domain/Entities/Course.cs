@@ -1,11 +1,12 @@
 ﻿namespace ExamForge.Domain.Entities;
 
+using ExamForge.Domain.Common;
 using ExamForge.Domain.Exceptions;
-public class Course
+public class Course : Entity
 {
     private const int MaxNameLength = 150;
     private const int MaxDescriptionLength = 1000;
-    public Guid Id { get; private set; }
+
 
     public string Name { get; private set; }
 
@@ -13,7 +14,7 @@ public class Course
 
     public bool IsActive { get; private set; }
 
-    public DateTimeOffset CreatedAt { get; private set; }
+
 
     private Course()
     {
@@ -21,16 +22,15 @@ public class Course
     }
 
     private Course(
-        Guid id,
-        string name,
-        string? description,
-        DateTimeOffset createdAt)
+    Guid id,
+    string name,
+    string? description,
+    DateTimeOffset createdAt)
+    : base(id, createdAt)
     {
-        Id = id;
         Name = name;
         Description = description;
         IsActive = true;
-        CreatedAt = createdAt;
     }
 
     public static Course Create(
