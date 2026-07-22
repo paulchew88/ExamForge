@@ -10,11 +10,11 @@ public class UserTests
     public void Create_WithValidValues_CreatesPendingActiveUser()
     {
         // Arrange
-        var identityProviderId = Guid.CreateVersion7();
+        var externalIdentityId = Guid.CreateVersion7();
 
         // Act
         var user = User.Create(
-            identityProviderId,
+            externalIdentityId,
             "Paul",
             "Chew",
             "paul@example.com",
@@ -22,7 +22,8 @@ public class UserTests
 
         // Assert
         Assert.NotEqual(Guid.Empty, user.Id);
-        Assert.Equal(identityProviderId, user.IdentityProviderId);
+        Assert.Equal(externalIdentityId, user.ExternalIdentityId);
+        Assert.Equal(externalIdentityId, user.ExternalIdentityId);
         Assert.Equal("Paul", user.FirstName);
         Assert.Equal("Chew", user.LastName);
         Assert.Equal("paul@example.com", user.Email);

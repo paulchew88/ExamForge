@@ -2,7 +2,7 @@
 
 public enum SubmissionStatus
 {
-    InProgress = 1,
+    Draft = 1,
     Submitted = 2,
     Marked = 3,
     Released = 4
