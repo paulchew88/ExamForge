@@ -65,7 +65,7 @@ public class AssignmentQuestion : Entity
     {
         if (displayOrder < 1)
         {
-            throw new DomainException("Display order must be greater than zero.");
+            throw new DomainException("Order must be greater than zero.");
         }
         return displayOrder;
     }
