@@ -7,48 +7,42 @@ public class AssignmentQuestion : Entity
 {
     public Guid AssignmentId { get; private set; }
     public Guid QuestionId { get; private set; }
-    public int DisplayOrder { get; private set; }
+    public int Order { get; private set; }
     public int MaximumMarks { get; private set; }
-    public bool IsActive { get; private set; }
 
 
     private AssignmentQuestion() { }
 
     private AssignmentQuestion(
-        Guid id,
         Guid assignmentId,
         Guid questionId,
-        int displayOrder,
-        int maximumMarks,
-        bool isActive,
-        DateTimeOffset createdAt)
-        : base(id, createdAt)
+        int order,
+        int maximumMarks)
+        : base(Guid.CreateVersion7(), DateTimeOffset.UtcNow)
     {
-        AssignmentId = assignmentId;
-        QuestionId = questionId;
-        DisplayOrder = displayOrder;
-        MaximumMarks = maximumMarks;
-        IsActive = isActive;
+        AssignmentId = ValidateAssignmentId(assignmentId);
+        QuestionId = ValidateQuestionId(questionId);
+        Order = ValidateDisplayOrder(order);
+        MaximumMarks = ValidateMaximumMarks(maximumMarks);
     }
+
     public static AssignmentQuestion Create(
         Guid assignmentId,
         Guid questionId,
-        int displayOrder,
+        int order,
         int maximumMarks)
     {
         return new AssignmentQuestion(
-            Guid.CreateVersion7(),
-            ValidateAssignmentId(assignmentId),
-            ValidateQuestionId(questionId),
-            ValidateDisplayOrder(displayOrder),
-            ValidateMaximumMarks(maximumMarks),
-            true, // Default to active
-            DateTimeOffset.UtcNow);
+            assignmentId,
+            questionId,
+            order,
+            maximumMarks);
     }
 
-    public void ChangeDisplayOrder(int newDisplayOrder)
+
+    public void ChangeOrder(int newDisplayOrder)
     {
-        DisplayOrder = ValidateDisplayOrder(newDisplayOrder);
+        Order = ValidateDisplayOrder(newDisplayOrder);
     }
 
     private static Guid ValidateAssignmentId(Guid assignmentId)
@@ -83,14 +77,7 @@ public class AssignmentQuestion : Entity
         }
         return maximumMarks;
     }
-    public void Activate()
-    {
-        IsActive = true;
-    }
-    public void Deactivate()
-    {
-        IsActive = false;
-    }
+
     public void ChangeMaximumMarks(int newMaximumMarks)
     {
         MaximumMarks = ValidateMaximumMarks(newMaximumMarks);
