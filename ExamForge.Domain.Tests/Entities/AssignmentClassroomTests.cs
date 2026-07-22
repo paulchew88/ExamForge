@@ -1,5 +1,5 @@
-﻿using ExamForge.Domain.Exceptions;
-
+﻿using ExamForge.Domain.Entities;
+using ExamForge.Domain.Exceptions;
 namespace ExamForge.Domain.Tests.Entities;
 
 public class AssignmentClassroomTests

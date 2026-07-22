@@ -8,7 +8,7 @@ public class AssignmentClassroom : Entity
     public Guid AssignmentId { get; private set; }
     public Guid ClassroomId { get; private set; }
     public DateTimeOffset AssignedAt { get; private set; }
-    public DateTimeOffset? UnassignedAt { get; private set; };
+    public DateTimeOffset? UnassignedAt { get; private set; }
     public bool IsActive { get; private set; }
 
     private AssignmentClassroom() { }
