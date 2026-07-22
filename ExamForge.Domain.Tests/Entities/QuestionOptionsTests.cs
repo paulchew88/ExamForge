@@ -1,4 +1,4 @@
-﻿using ExamForge.Domain.Common;
+﻿using ExamForge.Domain.Entities;
 using ExamForge.Domain.Exceptions;
 
 namespace ExamForge.Domain.Tests.Entities;

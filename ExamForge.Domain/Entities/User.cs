@@ -74,7 +74,7 @@ public class User : Entity
             throw new DomainException("Identity provider ID cannot be empty.");
         }
         return externalIdentityId;
-        return externalIdentityId;
+
     }
     private static string ValidateFirstName(string firstName)
     {
