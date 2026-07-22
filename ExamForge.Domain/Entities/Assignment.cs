@@ -95,7 +95,7 @@ public class Assignment : Entity
         if (opensAt == default)
         {
             throw new DomainException(
-                "Assignment open date cannot be empty.");
+                "Assignment open date must be in the future.");
         }
 
         return opensAt;
