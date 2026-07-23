@@ -7,8 +7,7 @@ namespace ExamForge.Infrastructure.Persistence.Configurations;
 public sealed class CourseConfiguration
     : IEntityTypeConfiguration<Course>
 {
-    public void Configure(
-        EntityTypeBuilder<Course> builder)
+    public void Configure(EntityTypeBuilder<Course> builder)
     {
         builder.ToTable("Courses");
         builder.HasKey(c => c.Id);

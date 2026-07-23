@@ -14,6 +14,7 @@ public sealed class ExamForgeDbContext
     }
 
     public DbSet<Course> Courses => Set<Course>();
+    public DbSet<QuestionAsset> QuestionAssets => Set<QuestionAsset>();
     public DbSet<Unit> Units => Set<Unit>();
     public DbSet<Topic> Topics => Set<Topic>();
     public DbSet<Question> Questions => Set<Question>();
