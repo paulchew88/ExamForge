@@ -26,7 +26,7 @@ public class QuestionOptionTests
         Assert.Equal(questionId, option.QuestionId);
         Assert.Equal("Transmission Control Protocol", option.Text);
         Assert.True(option.IsCorrect);
-        Assert.Equal(1, option.Order);
+        Assert.Equal(1, option.DisplayOrder);
 
         Assert.InRange(
             option.CreatedAt,
@@ -268,7 +268,7 @@ public class QuestionOptionTests
 
         var originalQuestionId = option.QuestionId;
         var originalIsCorrect = option.IsCorrect;
-        var originalOrder = option.Order;
+        var originalOrder = option.DisplayOrder;
         var originalCreatedAt = option.CreatedAt;
 
         // Act
@@ -277,7 +277,7 @@ public class QuestionOptionTests
         // Assert
         Assert.Equal(originalQuestionId, option.QuestionId);
         Assert.Equal(originalIsCorrect, option.IsCorrect);
-        Assert.Equal(originalOrder, option.Order);
+        Assert.Equal(originalOrder, option.DisplayOrder);
         Assert.Equal(originalCreatedAt, option.CreatedAt);
     }
 
@@ -359,7 +359,7 @@ public class QuestionOptionTests
         option.ChangeOrder(3);
 
         // Assert
-        Assert.Equal(3, option.Order);
+        Assert.Equal(3, option.DisplayOrder);
     }
 
     [Theory]
@@ -371,7 +371,7 @@ public class QuestionOptionTests
     {
         // Arrange
         var option = CreateValidOption();
-        var originalOrder = option.Order;
+        var originalOrder = option.DisplayOrder;
 
         // Act
         var action = () => option.ChangeOrder(newOrder);
@@ -383,7 +383,7 @@ public class QuestionOptionTests
             "Order must be greater than zero.",
             exception.Message);
 
-        Assert.Equal(originalOrder, option.Order);
+        Assert.Equal(originalOrder, option.DisplayOrder);
     }
 
     [Fact]
@@ -425,7 +425,7 @@ public class QuestionOptionTests
         // Assert
         Assert.Equal("Updated option", option.Text);
         Assert.True(option.IsCorrect);
-        Assert.Equal(2, option.Order);
+        Assert.Equal(2, option.DisplayOrder);
 
         // Act
         option.MarkAsIncorrect();

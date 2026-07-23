@@ -4,6 +4,7 @@ using ExamForge.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamForge.Infrastructure.Migrations
 {
     [DbContext(typeof(ExamForgeDbContext))]
-    partial class ExamForgeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260723205136_V0_2_PersistenceComplete")]
+    partial class V0_2_PersistenceComplete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

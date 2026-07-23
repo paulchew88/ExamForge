@@ -25,6 +25,8 @@ public sealed class AssignmentClassroomConfiguration : IEntityTypeConfiguration<
         builder.Property(ac => ac.UnassignedAt)
             .IsRequired(false);
 
+        builder.HasIndex(ac => new { ac.AssignmentId, ac.ClassroomId })
+            .IsUnique();
         builder.HasOne<Assignment>()
             .WithMany()
             .HasForeignKey(ac => ac.AssignmentId)

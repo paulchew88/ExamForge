@@ -29,8 +29,6 @@ public sealed class SubmissionConfiguration : IEntityTypeConfiguration<Submissio
 
         builder.Property(s => s.ReleasedAt);
 
-        builder.HasIndex(s => s.AssignmentId);
-
         builder.HasIndex(s => s.StudentId);
 
         builder.HasIndex(s => new

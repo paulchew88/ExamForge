@@ -24,10 +24,7 @@ public sealed class UnitConfiguration : IEntityTypeConfiguration<Unit>
         builder.HasOne<Course>()
             .WithMany()
             .HasForeignKey(u => u.CourseId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasIndex(u => u.CourseId);
-
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasIndex(u => new { u.CourseId, u.DisplayOrder })
             .IsUnique(false);
 
