@@ -5,8 +5,8 @@ namespace ExamForge.Domain.Entities;
 
 public class SubmissionAnswer : Entity
 {
-    public const int MaxAnswerLength = 20_000;
-    public const int MaxFeedbackLength = 5_000;
+    public const int MaxAnswerLength = 4_000;
+    public const int MaxFeedbackLength = 4_000;
 
     public Guid SubmissionId { get; private set; }
     public Guid AssignmentQuestionId { get; private set; }

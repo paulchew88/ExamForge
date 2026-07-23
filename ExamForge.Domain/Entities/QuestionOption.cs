@@ -10,7 +10,7 @@ public class QuestionOption : Entity
     public Guid QuestionId { get; private set; }
     public string Text { get; private set; } = null!;
     public bool IsCorrect { get; private set; }
-    public int Order { get; private set; }
+    public int DisplayOrder { get; private set; }
 
     private QuestionOption() { }
 
@@ -24,7 +24,7 @@ public class QuestionOption : Entity
         QuestionId = ValidateQuestionId(questionId);
         Text = ValidateText(text);
         IsCorrect = isCorrect;
-        Order = ValidateOrder(order);
+        DisplayOrder = ValidateOrder(order);
     }
 
     public static QuestionOption Create(
@@ -55,9 +55,9 @@ public class QuestionOption : Entity
         IsCorrect = false;
     }
 
-    public void ChangeOrder(int newOrder)
+    public void ChangeOrder(int newDisplayOrder)
     {
-        Order = ValidateOrder(newOrder);
+        DisplayOrder = ValidateOrder(newDisplayOrder);
     }
 
     private static Guid ValidateQuestionId(Guid questionId)

@@ -39,7 +39,7 @@ public class Submission : Entity
         return new Submission(
             ValidateAssignmentId(assignmentId),
             ValidateStudentId(studentId),
-            ValidateStatus(SubmissionStatus.Draft),
+            SubmissionStatus.Draft,
             null,
             null,
             null

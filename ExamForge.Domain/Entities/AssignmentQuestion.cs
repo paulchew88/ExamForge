@@ -14,11 +14,13 @@ public class AssignmentQuestion : Entity
     private AssignmentQuestion() { }
 
     private AssignmentQuestion(
+        Guid id,
         Guid assignmentId,
         Guid questionId,
         int order,
-        int maximumMarks)
-        : base(Guid.CreateVersion7(), DateTimeOffset.UtcNow)
+        int maximumMarks,
+        DateTimeOffset createdAt)
+        : base(id, createdAt)
     {
         AssignmentId = ValidateAssignmentId(assignmentId);
         QuestionId = ValidateQuestionId(questionId);
@@ -27,16 +29,18 @@ public class AssignmentQuestion : Entity
     }
 
     public static AssignmentQuestion Create(
-        Guid assignmentId,
-        Guid questionId,
-        int order,
-        int maximumMarks)
+    Guid assignmentId,
+    Guid questionId,
+    int order,
+    int maximumMarks)
     {
         return new AssignmentQuestion(
-            assignmentId,
-            questionId,
-            order,
-            maximumMarks);
+            Guid.CreateVersion7(),
+            ValidateAssignmentId(assignmentId),
+            ValidateQuestionId(questionId),
+            ValidateDisplayOrder(order),
+            ValidateMaximumMarks(maximumMarks),
+            DateTimeOffset.UtcNow);
     }
 
 

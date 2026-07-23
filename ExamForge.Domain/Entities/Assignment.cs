@@ -57,10 +57,18 @@ public class Assignment : Entity
 
     public void Publish()
     {
+        if (IsPublished)
+        {
+            throw new DomainException("Assignment is already published.");
+        }
         IsPublished = true;
     }
     public void ReturnToDraft()
     {
+        if (!IsPublished)
+        {
+            throw new DomainException("Assignment is already in draft state.");
+        }
         IsPublished = false;
     }
     private static Guid ValidateClassroomId(Guid classroomId)

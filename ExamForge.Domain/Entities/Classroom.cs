@@ -5,8 +5,8 @@ namespace ExamForge.Domain.Entities;
 
 public class Classroom : Entity
 {
-    private const int MaxNameLength = 150;
-    private const int MaxJoinCodeLength = 10;
+    public const int MaxNameLength = 150;
+    public const int MaxJoinCodeLength = 10;
     public Guid CourseId { get; private set; }
     public Guid TeacherId { get; private set; }
     public string Name { get; private set; }
