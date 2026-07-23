@@ -320,7 +320,7 @@ public class QuestionTests
         var question = CreateValidQuestion();
 
         // Act
-        question.changePrompt(
+        question.ChangePrompt(
             "Explain two benefits of decomposition.");
 
         // Assert
@@ -336,7 +336,7 @@ public class QuestionTests
         var question = CreateValidQuestion();
 
         // Act
-        question.changePrompt(
+        question.ChangePrompt(
             "  Explain two benefits of decomposition.  ");
 
         // Assert
@@ -354,7 +354,7 @@ public class QuestionTests
         var invalidPrompt = new string('A', 5001);
 
         // Act
-        var action = () => question.changePrompt(invalidPrompt);
+        var action = () => question.ChangePrompt(invalidPrompt);
 
         // Assert
         Assert.Throws<DomainException>(action);

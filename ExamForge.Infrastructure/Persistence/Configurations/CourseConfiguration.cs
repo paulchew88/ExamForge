@@ -9,7 +9,7 @@ public sealed class CourseConfiguration
 {
     public void Configure(EntityTypeBuilder<Course> builder)
     {
-        builder.ToTable("Courses");
+        builder.ToTable("Course");
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id)
             .ValueGeneratedNever();

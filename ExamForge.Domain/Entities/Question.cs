@@ -5,8 +5,8 @@ namespace ExamForge.Domain.Entities;
 
 public class Question : Entity
 {
-    private const int MaxPromptLength = 5000;
-    private const int MaxMarkSchemeLength = 10000;
+    public const int MaxPromptLength = 4000;
+    public const int MaxMarkSchemeLength = 10000;
 
     public Guid TopicId { get; private set; }
 
@@ -114,7 +114,7 @@ public class Question : Entity
     }
 
 
-    public void changePrompt(string newPrompt)
+    public void ChangePrompt(string newPrompt)
     {
         Prompt = ValidatePrompt(newPrompt);
     }

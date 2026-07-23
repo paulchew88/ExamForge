@@ -27,7 +27,7 @@ public sealed class CourseConfigurationTests
     [Fact]
     public void Course_ShouldMapToCoursesTable()
     {
-        Assert.Equal("Courses", _entityType.GetTableName());
+        Assert.Equal("Course", _entityType.GetTableName());
     }
 
     [Fact]

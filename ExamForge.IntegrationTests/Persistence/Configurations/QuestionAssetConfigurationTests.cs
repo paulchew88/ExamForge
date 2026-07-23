@@ -28,7 +28,7 @@ public class QuestionAssetConfigurationTests
         var entityType = context.Model.FindEntityType(typeof(QuestionAsset));
 
         Assert.NotNull(entityType);
-        Assert.Equal("QuestionAssets", entityType.GetTableName());
+        Assert.Equal("QuestionAsset", entityType.GetTableName());
     }
 
     [Fact]

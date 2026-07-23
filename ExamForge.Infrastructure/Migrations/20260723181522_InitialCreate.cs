@@ -128,24 +128,6 @@ namespace ExamForge.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TopicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Prompt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MarkScheme = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaximumMarks = table.Column<int>(type: "int", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SubmissionAnswers",
                 columns: table => new
                 {
@@ -183,40 +165,6 @@ namespace ExamForge.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Topics",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Topics", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Units",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Units", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -236,7 +184,77 @@ namespace ExamForge.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionAssets",
+                name: "Unit",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Unit", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Unit_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topic",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topic", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Topic_Unit_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Unit",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TopicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Prompt = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    MarkScheme = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
+                    MaximumMarks = table.Column<int>(type: "int", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Question_Topic_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QuestionAsset",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -253,24 +271,44 @@ namespace ExamForge.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionAssets", x => x.Id);
+                    table.PrimaryKey("PK_QuestionAsset", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuestionAssets_Questions_QuestionId",
+                        name: "FK_QuestionAsset_Question_QuestionId",
                         column: x => x.QuestionId,
-                        principalTable: "Questions",
+                        principalTable: "Question",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionAssets_QuestionId",
-                table: "QuestionAssets",
+                name: "IX_Question_TopicId_DisplayOrder",
+                table: "Question",
+                columns: new[] { "TopicId", "DisplayOrder" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuestionAsset_QuestionId",
+                table: "QuestionAsset",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionAssets_QuestionId_DisplayOrder",
-                table: "QuestionAssets",
+                name: "IX_QuestionAsset_QuestionId_DisplayOrder",
+                table: "QuestionAsset",
                 columns: new[] { "QuestionId", "DisplayOrder" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Topic_UnitId_DisplayOrder",
+                table: "Topic",
+                columns: new[] { "UnitId", "DisplayOrder" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Unit_CourseId",
+                table: "Unit",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Unit_CourseId_DisplayOrder",
+                table: "Unit",
+                columns: new[] { "CourseId", "DisplayOrder" });
         }
 
         /// <inheritdoc />
@@ -292,10 +330,7 @@ namespace ExamForge.Infrastructure.Migrations
                 name: "ClassroomStudents");
 
             migrationBuilder.DropTable(
-                name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "QuestionAssets");
+                name: "QuestionAsset");
 
             migrationBuilder.DropTable(
                 name: "QuestionOptions");
@@ -307,16 +342,19 @@ namespace ExamForge.Infrastructure.Migrations
                 name: "Submissions");
 
             migrationBuilder.DropTable(
-                name: "Topics");
-
-            migrationBuilder.DropTable(
-                name: "Units");
-
-            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "Question");
+
+            migrationBuilder.DropTable(
+                name: "Topic");
+
+            migrationBuilder.DropTable(
+                name: "Unit");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
         }
     }
 }

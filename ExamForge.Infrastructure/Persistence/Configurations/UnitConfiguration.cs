@@ -25,7 +25,11 @@ public sealed class UnitConfiguration : IEntityTypeConfiguration<Unit>
             .WithMany()
             .HasForeignKey(u => u.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(u => u.CourseId);
+
         builder.HasIndex(u => new { u.CourseId, u.DisplayOrder })
             .IsUnique(false);
+
     }
 }

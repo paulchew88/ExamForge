@@ -199,7 +199,6 @@ namespace ExamForge.Infrastructure.Migrations
             modelBuilder.Entity("ExamForge.Domain.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -213,6 +212,7 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.Property<string>("MarkScheme")
                         .IsRequired()
+                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MaximumMarks")
@@ -220,6 +220,7 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.Property<string>("Prompt")
                         .IsRequired()
+                        .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TopicId")
@@ -227,7 +228,9 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Questions");
+                    b.HasIndex("TopicId", "DisplayOrder");
+
+                    b.ToTable("Question", (string)null);
                 });
 
             modelBuilder.Entity("ExamForge.Domain.Entities.QuestionAsset", b =>
@@ -281,7 +284,7 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.HasIndex("QuestionId", "DisplayOrder");
 
-                    b.ToTable("QuestionAssets", (string)null);
+                    b.ToTable("QuestionAsset", (string)null);
                 });
 
             modelBuilder.Entity("ExamForge.Domain.Entities.QuestionOption", b =>
@@ -382,14 +385,14 @@ namespace ExamForge.Infrastructure.Migrations
             modelBuilder.Entity("ExamForge.Domain.Entities.Topic", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
@@ -399,20 +402,22 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<Guid>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Topics");
+                    b.HasIndex("UnitId", "DisplayOrder");
+
+                    b.ToTable("Topic", (string)null);
                 });
 
             modelBuilder.Entity("ExamForge.Domain.Entities.Unit", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CourseId")
@@ -422,7 +427,8 @@ namespace ExamForge.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
@@ -432,11 +438,16 @@ namespace ExamForge.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Units");
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseId", "DisplayOrder");
+
+                    b.ToTable("Unit", (string)null);
                 });
 
             modelBuilder.Entity("ExamForge.Domain.Entities.User", b =>
@@ -477,11 +488,38 @@ namespace ExamForge.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ExamForge.Domain.Entities.Question", b =>
+                {
+                    b.HasOne("ExamForge.Domain.Entities.Topic", null)
+                        .WithMany()
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ExamForge.Domain.Entities.QuestionAsset", b =>
                 {
                     b.HasOne("ExamForge.Domain.Entities.Question", null)
                         .WithMany()
                         .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExamForge.Domain.Entities.Topic", b =>
+                {
+                    b.HasOne("ExamForge.Domain.Entities.Unit", null)
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ExamForge.Domain.Entities.Unit", b =>
+                {
+                    b.HasOne("ExamForge.Domain.Entities.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
