@@ -4,8 +4,8 @@ using ExamForge.Domain.Common;
 using ExamForge.Domain.Exceptions;
 public class Course : Entity
 {
-    private const int MaxNameLength = 150;
-    private const int MaxDescriptionLength = 1000;
+    public const int MaxNameLength = 150;
+    public const int MaxDescriptionLength = 1000;
 
 
     public string Name { get; private set; }

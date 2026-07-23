@@ -8,7 +8,7 @@ public sealed class QuestionAssetConfiguration : IEntityTypeConfiguration<Questi
 {
     public void Configure(EntityTypeBuilder<QuestionAsset> builder)
     {
-        builder.ToTable("QuestionAssets");
+        builder.ToTable("QuestionAsset");
         builder.HasKey(qa => qa.Id);
         builder.Property(qa => qa.Id)
             .ValueGeneratedNever();

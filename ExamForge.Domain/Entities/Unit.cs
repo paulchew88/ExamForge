@@ -5,8 +5,8 @@ namespace ExamForge.Domain.Entities;
 
 public class Unit : Entity
 {
-    private const int MaxNameLength = 150;
-    private const int MaxDescriptionLength = 1000;
+    public const int MaxNameLength = 150;
+    public const int MaxDescriptionLength = 1000;
     public Guid CourseId { get; private set; }
     public string Name { get; private set; }
     public string? Description { get; private set; }
