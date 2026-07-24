@@ -1,4 +1,4 @@
-﻿namespace ExamForge.Application.Courses.CreateCourse;
+﻿namespace ExamForge.Application.Courses.Response;
 
 public record CreateCourseResponse
 {

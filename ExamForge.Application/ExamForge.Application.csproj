@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Storage\" />
+    <Folder Include="Common\Abstractions\Storage\" />
     <Folder Include="Assignments\" />
     <Folder Include="Users\" />
     <Folder Include="Submissions\" />

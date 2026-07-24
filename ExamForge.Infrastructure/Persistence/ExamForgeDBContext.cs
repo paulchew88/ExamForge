@@ -1,7 +1,6 @@
-﻿using ExamForge.Domain.Entities;
-using ExamForge.Domain.Repositories;
+﻿using ExamForge.Application.Common.Abstractions.Persistence;
+using ExamForge.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-
 namespace ExamForge.Infrastructure.Persistence;
 
 public sealed class ExamForgeDbContext

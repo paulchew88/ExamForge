@@ -1,18 +1,18 @@
 ﻿using ExamForge.Domain.Entities;
 
-namespace ExamForge.Application.Abstractions.Persistence;
+namespace ExamForge.Application.Common.Abstractions.Persistence;
 
-public interface IClassroomRepository
+public interface ICourseRepository
 {
-    Task<Classroom?> GetByIdAsync(
+    Task<Course?> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
     Task AddAsync(
-        Classroom classroom,
+        Course course,
         CancellationToken cancellationToken = default);
 
-    Task<bool> ExistsByJoinCodeAsync(
-        string joinCode,
+    Task<bool> ExistsByNameAsync(
+        string name,
         CancellationToken cancellationToken = default);
 }

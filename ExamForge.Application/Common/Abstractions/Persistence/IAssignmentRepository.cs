@@ -1,6 +1,6 @@
 ﻿using ExamForge.Domain.Entities;
 
-namespace ExamForge.Application.Abstractions.Persistence;
+namespace ExamForge.Application.Common.Abstractions.Persistence;
 
 public interface IAssignmentRepository
 {

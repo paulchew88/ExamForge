@@ -1,4 +1,4 @@
-﻿namespace ExamForge.Application.Abstractions.Requests;
+﻿namespace ExamForge.Application.Common.Abstractions.Requests;
 
 public interface ICommandHandler<TCommand, TResponse>
     where TCommand : ICommand<TResponse>
