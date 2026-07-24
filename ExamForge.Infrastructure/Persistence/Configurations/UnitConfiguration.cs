@@ -21,6 +21,9 @@ public sealed class UnitConfiguration : IEntityTypeConfiguration<Unit>
             .IsRequired();
         builder.Property(u => u.CreatedAt)
             .IsRequired();
+
+        builder.HasIndex(u => u.CourseId);
+
         builder.HasOne<Course>()
             .WithMany()
             .HasForeignKey(u => u.CourseId)

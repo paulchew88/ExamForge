@@ -139,12 +139,12 @@ public sealed class UnitConfigurationTests
     }
 
     [Fact]
-    public void CourseRelationship_ShouldUseCascadeDelete()
+    public void CourseRelationship_ShouldUseRestrictDelete()
     {
         var foreignKey = GetCourseForeignKey();
 
         Assert.Equal(
-            DeleteBehavior.Cascade,
+            DeleteBehavior.Restrict,
             foreignKey.DeleteBehavior);
     }
 

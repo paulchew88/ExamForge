@@ -114,7 +114,7 @@ public class QuestionTests
     public void Create_WithPromptAtMaximumLength_CreatesQuestion()
     {
         // Arrange
-        var prompt = new string('A', 5000);
+        var prompt = new string('A', 4000);
 
         // Act
         var question = Question.Create(
@@ -146,7 +146,7 @@ public class QuestionTests
         var exception = Assert.Throws<DomainException>(action);
 
         Assert.Equal(
-            "Question prompt cannot exceed 5000 characters.",
+            "Question prompt cannot exceed 4000 characters.",
             exception.Message);
     }
 

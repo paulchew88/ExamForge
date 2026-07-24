@@ -1,14 +1,14 @@
 ﻿using ExamForge.Domain.Entities;
 
-namespace ExamForge.Domain.Repositories;
+namespace ExamForge.Application.Abstractions.Persistence;
 
-public interface IQuestionRepository
+public interface IAssignmentRepository
 {
-    Task<Question?> GetByIdAsync(
+    Task<Assignment?> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default);
 
     Task AddAsync(
-        Question question,
+        Assignment assignment,
         CancellationToken cancellationToken = default);
 }
